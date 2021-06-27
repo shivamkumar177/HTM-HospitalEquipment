@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <p style="text-align: center; font: 4em sans-serif;">Hospital Equipments</p>
+    </div>
+    <hr>
+    </div>
+    <div class="top-bar">
+        <div class="container my-2" style="background-color: beige;">
+            <h2>Add an Equipment</h2>
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="nameequipment">Name of Equipment</label>
+                    <input type="text" class="form-control" id="nameequipment" name="name">
+                    <!-- <label for="picfile">Picture of Equipment</label>
+                    <input type="file" class="form-control-file" id="picfile" name="file"> -->
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Decription</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+                {% with messages = get_flashed_messages() %}
+                        {% if messages%}
+                            {% for message in messages%}
+                                <h3 style="color: red;">{{message}}</h3>
+                            {% endfor %}
+                        {%endif%}
+                    {% endwith %}
+            </form>
+        </div>
+        <div class="container">
+            <h2>Available Equipment</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">sno</th>
+                        <!-- <th scope="col">Picture</th> -->
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equip in allequip %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <!-- <td>
+                        <img src="{{ filename1 }}" alt="image" style="width: 150px; height: 100px;">
+                        </td> -->
+                        <td>{{equip.name}}</td>
+                        <td>{{equip.desc}}</td>
+                        <td><a href="/delete/{{equip.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</body>
+
+</html>
